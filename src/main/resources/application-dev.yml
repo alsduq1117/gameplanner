@@ -1,0 +1,166 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: utf-8
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jurumarble;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+
+
+  h2:
+    console:
+      enabled: true
+
+
+  ## jpa 실행시 sql 스크립트 자동실행
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+
+  jpa:
+    open-in-view: true
+    show-sql: true
+
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    properties:
+      '[hibernate.format_sql]': true
+    output:
+      ansi:
+        enabled: always
+    defer-datasource-initialization: true
+
+  ## feign
+  oauth2:
+    client:
+      registration:
+        kakao:
+          client-id: be0a6d22a5fcd591b8fc3f6a8f446afe
+          client-secret: EQkkDwZ6Fxc09hvHGpPzetICJ0kI9Va2
+        naver:
+          client-id: xJmwgmsytfU8CsmMQzjz
+          client-secret: HcKZgIAkeP
+
+
+
+
+auth.kakao.url: https://kauth.kakao.com/
+api.kakao.url: https://kapi.kakao.com/
+
+auth.naver.url: https://nid.naver.com/oauth2.0/
+api.naver.url: https://openapi.naver.com/
+
+
+tour:
+  api:
+    url: http://apis.data.go.kr/B551011/KorService1/
+    servicekey: O%2Bu7dIy7%2BLr5W7fNuhXUo5Ljm%2FTCEPS7N3bF%2BtPuLjDXEqpkZpe2Xsf9woSbRp%2F9FAwTH4k3YeHtqaaUHae%2FVA%3D%3D
+    mobile:
+      os: ETC
+      app: jurumarble
+    response:
+      type: json
+    image-yn: Y
+    content-type-id: 39
+    subimage-yn: Y
+    num-of-rows: 10
+    list-yn: Y
+    arrange: O
+    cat1: A05
+    cat2: A0502
+
+
+feign:
+  client:
+    config:
+      auth-kakao:
+        connectTimeout: 3100
+        readTimeout: 10100
+        loggerLevel: full
+      api-kakao:
+        connectTimeout: 3100
+        readTimeout: 10100
+        loggerLevel: full
+      auth-naver:
+        connectTimeout: 3100
+        readTimeout: 10100
+        loggerLevel: full
+      api-naver:
+        connectTimeout: 3100
+        readTimeout: 10100
+        loggerLevel: full
+      tour-service:
+        connectTimeout: 5000
+        readTimeout: 20000
+        loggerLevel: full
+
+  compression:
+    response:
+      enabled: false
+      useGzipDecoder: false
+  httpclient:
+    max-connections: 2000
+    max-connections-per-route: 500
+
+
+
+
+## 로그 레벨 설정
+logging:
+  level:
+    '[org.springframework.boot.web]': DEBUG
+    '[org.org.hibernate.SQL]': DEBUG
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': DEBUG
+
+
+## JWT 환경변수 설정
+jwt.issuer: admin
+jwt.secretKey: adsadasdhwqhqkjdhjkw
+jwt.tokenPrefix: juruMarble
+
+
+## Swagger 설정
+springdoc:
+  swagger-ui:
+    path: /api-docs.html
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+  default-produces-media-type: application/json
+  cache:
+    disabled: true
+
+
+swagger.url: http://localhost:8080/swagger-ui/index.html#
+
+
+#s3
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAUUUTLL4G7AKZ4WWN
+      secret-key: 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
+    s3:
+      bucket: elasticbeanstalk-ap-northeast-2-319210348301
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: 'false'
