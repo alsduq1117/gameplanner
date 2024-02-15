@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main',
-                    url: "https://github.com/alsduq1117/gameplanner.git",
-                    credentialsId: 'minyeob'
+                git branch: 'main', url: "https://github.com/chrkb1569/DevOps-Practice"
             }
         }
     }
