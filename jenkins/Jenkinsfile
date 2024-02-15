@@ -8,11 +8,11 @@ pipeline {
             }
         }
 
-        stage('Build Project') {
-            steps {
-                sh './gradlew clean build'
-            }
-        }
+//         stage('Build Project') {
+//             steps {
+//                 sh './gradlew clean build'
+//             }
+//         }
 
 //         stage('Docker Login') {
 //             steps {
