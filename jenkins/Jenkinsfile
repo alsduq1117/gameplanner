@@ -14,33 +14,33 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t alsduq1117/jenkins:test .'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                sh 'docker push alsduq1117/jenkins:test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
-                sh 'scp $JAR_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/alsduq1117'
-                sh 'scp $SCRIPT_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/alsduq1117'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/alsduq1117/DockerDeploy.sh"'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/alsduq1117/*.jar"'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "/home/ubuntu/alsduq1117/DockerDeploy.sh"'
-            }
-        }
+//         stage('Docker Login') {
+//             steps {
+//                 sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+//             }
+//         }
+//
+//         stage('Build Docker Image') {
+//             steps {
+//                 sh 'docker build -t alsduq1117/jenkins:test .'
+//             }
+//         }
+//
+//         stage('Push Docker Image') {
+//             steps {
+//                 sh 'docker push alsduq1117/jenkins:test'
+//             }
+//         }
+//
+//         stage('Deploy') {
+//             steps {
+//                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
+//                 sh 'scp $JAR_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/alsduq1117'
+//                 sh 'scp $SCRIPT_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/alsduq1117'
+//                 sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/alsduq1117/DockerDeploy.sh"'
+//                 sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/alsduq1117/*.jar"'
+//                 sh 'ssh ubuntu@$APPLICATION_SERVER "/home/ubuntu/alsduq1117/DockerDeploy.sh"'
+//             }
+//         }
     }
 }
