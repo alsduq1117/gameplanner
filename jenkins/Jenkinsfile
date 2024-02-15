@@ -34,5 +34,7 @@ pipeline {
                 sh 'docker push alsduq1117/jenkins:test'
             }
         }
+
     }
+
 }
