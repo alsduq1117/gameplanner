@@ -69,7 +69,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
                                     removePrefix: '',
-                                    remoteDirectory: '/home/ubuntu/app',
+                                    remoteDirectory: '/',
                                     execCommand: '''
                                     echo "JAR_FILE_PATH: ${JAR_FILE_PATH}"
                                     echo "SCRIPT_FILE_PATH: ${SCRIPT_FILE_PATH}"
