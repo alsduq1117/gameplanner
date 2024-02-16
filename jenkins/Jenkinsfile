@@ -41,7 +41,7 @@ pipeline {
                     continueOnError: false, failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: 'SSH_SERVER_NAME',
+                            configName: 'ApplicationServer',
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
