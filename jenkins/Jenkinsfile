@@ -34,6 +34,7 @@ pipeline {
                 sh 'docker push alsduq1117/jenkins:test'
             }
         }
+
         stage('Deploy') {
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
