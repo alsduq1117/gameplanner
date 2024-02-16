@@ -37,12 +37,26 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'ssh -i /home/ubuntu/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
-                sh 'scp $JAR_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
-                sh 'scp $SCRIPT_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh"'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/app/*.jar"'
-                sh 'ssh ubuntu@$APPLICATION_SERVER "/home/ubuntu/app/DockerDeploy.sh"'
+                sshPublisher(
+                    continueOnError: false, failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'SSH_SERVER_NAME',
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
+                                    removePrefix: '',
+                                    remoteDirectory: '/home/ubuntu/app',
+                                    execCommand: '''
+                                    sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh
+                                    sudo chmod 777 /home/ubuntu/app/*.jar
+                                    /home/ubuntu/app/DockerDeploy.sh
+                                    '''
+                                )
+                            ]
+                        )
+                    ]
+                )
             }
         }
     }
