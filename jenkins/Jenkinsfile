@@ -2,6 +2,28 @@ pipeline {
     agent any
 
     stages {
+        stage('Test SSH Connection') {
+            steps {
+                sshPublisher(
+                    continueOnError: false, failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'ApplicationServer',  // SSH 서버 설정의 이름
+                            verbose: true,  // 세부 정보를 콘솔 출력에 표시
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: 'ls',  // 원격 서버에서 실행할 명령어
+                                    execTimeout: 120000  // 명령어 실행 제한 시간(밀리초)
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
+
+
+
         stage('Clone Repository') {
             steps {
                 git branch: 'main',
@@ -38,21 +60,26 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshPublisher(
-                    continueOnError: false,
-                    failOnError: true,
+                    continueOnError: false, failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "ApplicationServer",
+                            configName: 'ApplicationServer',
+                            verbose: true,
                             transfers: [
                                 sshTransfer(
-                                    sourceFiles: "$JAR_FILE_PATH,$SCRIPT_FILE_PATH",
-                                    removePrefix: "path/to",
-                                    remoteDirectory: "/home/ubuntu/app",
-                                    execCommand: """
-                                        sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh
-                                        sudo chmod 777 /home/ubuntu/app/*.jar
-                                        /home/ubuntu/app/DockerDeploy.sh
-                                    """
+                                    sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
+                                    removePrefix: '',
+                                    remoteDirectory: '/',
+                                    execCommand: '''
+                                    echo "JAR_FILE_PATH: ${JAR_FILE_PATH}"
+                                    echo "SCRIPT_FILE_PATH: ${SCRIPT_FILE_PATH}"
+                                    echo "Starting deployment..."
+                                    sudo chmod 777 /home/ubuntu/app/$SCRIPT_FILE_PATH
+                                    sudo chmod 777 /home/ubuntu/app/$JAR_FILE_PATH
+                                    echo "Running DockerDeploy.sh..."
+                                    /home/ubuntu/app/$SCRIPT_FILE_PATH
+                                    echo "Deployment finished."
+                                    '''
                                 )
                             ]
                         )
@@ -60,6 +87,5 @@ pipeline {
                 )
             }
         }
-
     }
 }
