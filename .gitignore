@@ -5,6 +5,16 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+src/main/resources/application.properties
+
+!build/libs
+
+*.yml
+!application-prod.yml
+!deploy.yml
+*/**/generated/
+
+
 ### STS ###
 .apt_generated
 .classpath
