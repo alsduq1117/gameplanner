@@ -68,6 +68,8 @@ pipeline {
                                     removePrefix: '',
                                     remoteDirectory: '/home/ubuntu/app',
                                     execCommand: '''
+                                    echo "JAR_FILE_PATH: $JAR_FILE_PATH"
+                                    echo "SCRIPT_FILE_PATH: $SCRIPT_FILE_PATH"
                                     echo "Starting deployment..."
                                     sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh
                                     sudo chmod 777 /home/ubuntu/app/*.jar
