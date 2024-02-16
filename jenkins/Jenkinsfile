@@ -45,5 +45,6 @@ pipeline {
                 sh 'ssh ubuntu@$APPLICATION_SERVER "/home/ubuntu/app/DockerDeploy.sh"'
             }
         }
+
     }
 }
