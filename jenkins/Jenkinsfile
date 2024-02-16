@@ -34,5 +34,15 @@ pipeline {
                 sh 'docker push alsduq1117/jenkins:test'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
+                sh 'scp $JAR_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
+                sh 'scp $SCRIPT_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
+                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh"'
+                sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/app/*.jar"'
+                sh 'ssh ubuntu@$APPLICATION_SERVER "/home/ubuntu/app/DockerDeploy.sh"'
+            }
+        }
     }
 }
