@@ -22,6 +22,8 @@ pipeline {
             }
         }
 
+
+
         stage('Clone Repository') {
             steps {
                 git branch: 'main',
@@ -62,6 +64,7 @@ pipeline {
                     publishers: [
                         sshPublisherDesc(
                             configName: 'ApplicationServer',
+                            verbose: true,
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
