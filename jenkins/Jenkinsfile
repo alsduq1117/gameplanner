@@ -77,7 +77,7 @@ pipeline {
                                     sudo chmod 777 /home/ubuntu/app/$SCRIPT_FILE_PATH
                                     sudo chmod 777 /home/ubuntu/app/$JAR_FILE_PATH
                                     echo "Running DockerDeploy.sh..."
-                                    /home/ubuntu/app/DockerDeploy.sh
+                                    /home/ubuntu/app/$SCRIPT_FILE_PATH
                                     echo "Deployment finished."
                                     '''
                                 )
