@@ -37,7 +37,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
+                sh 'ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@$APPLICATION_SERVER'
                 sh 'scp $JAR_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
                 sh 'scp $SCRIPT_FILE_PATH ubuntu@$APPLICATION_SERVER:/home/ubuntu/app'
                 sh 'ssh ubuntu@$APPLICATION_SERVER "sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh"'
