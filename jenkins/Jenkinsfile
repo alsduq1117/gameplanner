@@ -55,34 +55,26 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sshPublisher(
-                    continueOnError: false, failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: 'ApplicationServer',
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: '$JAR_FILE_PATH,$SCRIPT_FILE_PATH',
-                                    removePrefix: '',
-                                    remoteDirectory: '/home/ubuntu/app',
-                                    execCommand: '''
-                                    echo "JAR_FILE_PATH: $JAR_FILE_PATH"
-                                    echo "SCRIPT_FILE_PATH: $SCRIPT_FILE_PATH"
-                                    echo "Starting deployment..."
-                                    sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh
-                                    sudo chmod 777 /home/ubuntu/app/*.jar
-                                    echo "Running DockerDeploy.sh..."
-                                    /home/ubuntu/app/DockerDeploy.sh
-                                    echo "Deployment finished."
-                                    '''
+        stages {
+                stage('Test SSH Connection') {
+                    steps {
+                        sshPublisher(
+                            continueOnError: false, failOnError: true,
+                            publishers: [
+                                sshPublisherDesc(
+                                    configName: 'ApplicationServer',  // SSH 서버 설정의 이름
+                                    verbose: true,  // 세부 정보를 콘솔 출력에 표시
+                                    transfers: [
+                                        sshTransfer(
+                                            execCommand: 'ls',  // 원격 서버에서 실행할 명령어
+                                            execTimeout: 120000  // 명령어 실행 제한 시간(밀리초)
+                                        )
+                                    ]
                                 )
                             ]
                         )
-                    ]
-                )
-            }
+                    }
+                }
         }
 
     }
