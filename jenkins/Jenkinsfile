@@ -68,9 +68,12 @@ pipeline {
                                     removePrefix: '',
                                     remoteDirectory: '/home/ubuntu/app',
                                     execCommand: '''
+                                    echo "Starting deployment..."
                                     sudo chmod 777 /home/ubuntu/app/DockerDeploy.sh
                                     sudo chmod 777 /home/ubuntu/app/*.jar
+                                    echo "Running DockerDeploy.sh..."
                                     /home/ubuntu/app/DockerDeploy.sh
+                                    echo "Deployment finished."
                                     '''
                                 )
                             ]
