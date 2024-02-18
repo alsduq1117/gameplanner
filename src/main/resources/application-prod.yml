@@ -4,110 +4,13 @@ server:
     encoding:
       charset: utf-8
 
-spring:
-  datasource:
-    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${rds.username}
-    password: ${rds.password}
-  servlet:
-    multipart:
-      max-file-size: 20MB
-  cache:
-    type: redis
-  redis:
-    host: ${redis.host}
-    port: ${redis.port}
-
-  jpa:
-    open-in-view: true
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-
-
-
-  ## feign
-  oauth2:
-    client:
-      registration:
-        kakao:
-          client-id: ${kakao.client.id}
-          client-secret: ${kakao.client.secret}
-        naver:
-          client-id: ${naver.client.id}
-          client-secret: ${naver.client.secret}
-
-
-auth.kakao.url: https://kauth.kakao.com/
-api.kakao.url: https://kapi.kakao.com/
-
-auth.naver.url: https://nid.naver.com/oauth2.0/
-api.naver.url: https://openapi.naver.com/
-
-feign:
-  client:
-    config:
-      auth-kakao:
-        connectTimeout: 3100
-        readTimeout: 10100
-        loggerLevel: full
-      api-kakao:
-        connectTimeout: 3100
-        readTimeout: 10100
-        loggerLevel: full
-      auth-naver:
-        connectTimeout: 3100
-        readTimeout: 10100
-        loggerLevel: full
-      api-naver:
-        connectTimeout: 3100
-        readTimeout: 10100
-        loggerLevel: full
-
-  compression:
-    response:
-      enabled: false
-      useGzipDecoder: false
-  httpclient:
-    max-connections: 2000
-    max-connections-per-route: 500
-
-## tourApi 환경변수 설정
-tour:
-  api:
-    url: http://apis.data.go.kr/B551011/KorService1/
-    servicekey: ${tour.api.servicekey}
-    mobile:
-      os: ETC
-      app: jurumarble
-    response:
-      type: json
-    image-yn: Y
-    content-type-id: 39
-    subimage-yn: Y
-    num-of-rows: 10
-    list-yn: Y
-    arrange: O
-    cat1: A05
-    cat2: A0502
-
 
 logging:
   level:
     '[org.springframework.boot.web]': INFO
   file:
-    name: /var/app/current/jurumarble.log
+    name: /var/app/current/gameplanner.log
 
-
-## JWT 환경변수 설정
-jwt.issuer: ${jwt.issuer}
-jwt.secretKey: ${jwt.secretKey}
-jwt.tokenPrefix: ${jwt.tokenPrefix}
 
 ## Swagger 설정
 springdoc:
@@ -118,18 +21,4 @@ springdoc:
   show-actuator: true
   default-produces-media-type: application/json
 
-swagger.url: ${swagger.url}
 
-
-#s3
-cloud:
-  aws:
-    credentials:
-      access-key: ${aws.credentials.access.key}
-      secret-key: ${aws.credentials.secret.key}
-    s3:
-      bucket: ${aws.s3.bucket}
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: 'false'
