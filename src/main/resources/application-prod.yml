@@ -9,16 +9,4 @@ logging:
   level:
     '[org.springframework.boot.web]': INFO
   file:
-    name: /var/app/current/gameplanner.log
-
-
-## Swagger 설정
-springdoc:
-  swagger-ui:
-    path: /api-docs.html
-  api-docs:
-    path: /api-docs
-  show-actuator: true
-  default-produces-media-type: application/json
-
-
+    name: /var/app/current/gamePlanner.log
