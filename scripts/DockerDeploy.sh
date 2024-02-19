@@ -26,5 +26,3 @@ docker pull $DOCKER_REPOSITORY:$DOCKER_TAG
 
 echo "> Docker Image를 실행합니다."
 docker run -d -p 8080:8080 --name Jenkins --env-file /home/ubuntu/app/.env $DOCKER_REPOSITORY:$DOCKER_TAG
-
-echo
