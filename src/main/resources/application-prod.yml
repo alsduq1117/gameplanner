@@ -24,10 +24,3 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 
-
-logging:
-  level:
-    '[org.springframework.boot.web]': INFO
-  file:
-    name: /var/app/current/gamePlanner.log
-
