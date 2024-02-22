@@ -2,17 +2,16 @@ package com.gameplanner.exception;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.FieldError;
 
+@RequiredArgsConstructor
 public class ErrorDto {
     private final int status;
     private final String message;
     private List<FieldError> fieldErrors = new ArrayList<>();
 
-    public ErrorDto(int status, String message) {
-        this.status = status;
-        this.message = message;
-    }
 
     public int getStatus() {
         return status;
