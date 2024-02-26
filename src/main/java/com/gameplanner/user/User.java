@@ -1,18 +1,13 @@
 package com.gameplanner.user;
 
 
-import com.gameplanner.auth.Authority;
+import com.gameplanner.auth.AuthorityType;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
@@ -33,10 +28,15 @@ public class User {
     @Column(name = "activated")
     private boolean activated;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-    private Set<Authority> authorities;
+    @Enumerated(EnumType.STRING)
+    private AuthorityType authorityType;
+
+    @Builder
+    public User(String username, String password, String nickname, boolean activated, AuthorityType authorityType) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.activated = activated;
+        this.authorityType = authorityType;
+    }
 }
