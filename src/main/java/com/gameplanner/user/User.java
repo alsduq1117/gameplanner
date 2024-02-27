@@ -29,6 +29,7 @@ public class User {
     private boolean activated;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "authority_type")
     private AuthorityType authorityType;
 
     @Builder
