@@ -12,15 +12,18 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "game")
 public class Game {
 
     @Id
+    @Column(name ="game_id")
     private Long id;
 
     private String name;
 
     private String cover;
 
+    @Column(name = "first_release_date")
     private Long firstReleaseDate;
 
     @ElementCollection
