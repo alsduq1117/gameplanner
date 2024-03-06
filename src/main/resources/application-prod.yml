@@ -24,3 +24,11 @@ jwt:
   header: Authorization
   secret: ${JWT_SECRET}
   token-validity-in-seconds: 86400
+
+
+## 로그 레벨 설정
+logging:
+  level:
+    '[org.springframework.boot.web]': INFO
+    '[org.org.hibernate.SQL]': INFO
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': INFO
