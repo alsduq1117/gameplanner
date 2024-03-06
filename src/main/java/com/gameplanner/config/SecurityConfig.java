@@ -55,7 +55,7 @@ public class SecurityConfig {
 
                 // Http 요청에 대한 접근 제어 설정
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()  // 해당 경로는 모두 허용
+                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup","/api/games/*/*","/api/games", "/api/platforms", "/api/screenshots", "/api/videos", "/api/cover").permitAll()  // 해당 경로는 모두 허용
                         .requestMatchers( "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()  // Swagger 관련 경로는 모두 허용
                         .anyRequest().authenticated()  // 그 외 요청은 모두 인증 필요
                 )
