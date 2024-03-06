@@ -12,8 +12,20 @@ public interface IGDBClient {
     @PostMapping("/games")
     List<IGDBGameResponse> getGameList(@RequestBody String body);
 
+    @PostMapping("/covers")
+    List<IGDBCoverResponse> getCover(@RequestBody String body);
+
+
     @PostMapping("/platforms")
     List<IGDBPlatformResponse> getPlatForms(@RequestBody String body);
+
+    @PostMapping("/screenshots")
+    List<IGDBScreenshotResponse> getScreenshots(@RequestBody String body);
+
+    @PostMapping("game_videos")
+    List<IGDBVideoResponse> getVideos(@RequestBody String body);
+
+
 
 
 
