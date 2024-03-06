@@ -61,7 +61,7 @@ public class GameService {
         List<Game> games = gameRepository.findAll();
         for (Game game : games) {
             List<IGDBCoverResponse> cover = igdbClient.getCover("fields image_id; where game = " + game.getId() + ";");
-            if(!cover.isEmpty()) {
+            if (!cover.isEmpty()) {
                 game.updateCover(cover.get(0).getImage_id());
             }
         }
@@ -72,7 +72,7 @@ public class GameService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("firstReleaseDate"));
         Page<Game> games = gameRepository.findAll(pageable);
 
-        return new GameResponse(games,page, year, month);
+        return new GameResponse(games, page, size, year, month);
     }
 
     @Transactional
