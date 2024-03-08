@@ -1,5 +1,6 @@
-package com.gameplanner.game;
+package com.gameplanner.game.dto;
 
+import com.gameplanner.game.domain.Game;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

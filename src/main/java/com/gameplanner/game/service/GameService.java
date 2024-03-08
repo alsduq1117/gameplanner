@@ -1,6 +1,14 @@
-package com.gameplanner.game;
+package com.gameplanner.game.service;
 
 import com.gameplanner.client.igdb.*;
+import com.gameplanner.game.domain.Game;
+import com.gameplanner.game.domain.GameGenre;
+import com.gameplanner.game.domain.GamePlatform;
+import com.gameplanner.game.domain.Platform;
+import com.gameplanner.game.dto.GameResponse;
+import com.gameplanner.game.repository.GameRepository;
+import com.gameplanner.game.repository.PlatformRepository;
+import com.gameplanner.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -10,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,18 +76,21 @@ public class GameService {
         }
     }
 
-    @Transactional
     public GameResponse getGameList(int page, int size, int year, int month) {
+        long startUnixTime = DateUtils.toUnixTime(year, month);
+        LocalDateTime nextMonth = DateUtils.getNextMonth(year, month);
+        long nextMonthUnixTime = DateUtils.toUnixTime(nextMonth.getYear(), nextMonth.getMonthValue());
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("firstReleaseDate"));
-        Page<Game> games = gameRepository.findAll(pageable);
+        Page<Game> games = gameRepository.findAllByReleaseDateBetween(startUnixTime, nextMonthUnixTime, pageable);
 
         return new GameResponse(games, page, size, year, month);
     }
 
     @Transactional
     public void insertPlatforms() {
-        List<IGDBPlatformResponse> PlatForms = igdbClient.getPlatForms("fields name; limit 300; sort id asc;");
-        for (IGDBPlatformResponse response : PlatForms) {
+        List<IGDBPlatformResponse> platForms = igdbClient.getPlatForms("fields name; limit 300; sort id asc;");
+        for (IGDBPlatformResponse response : platForms) {
             platformRepository.save(Platform.builder().id((long) response.getId()).name(response.getName()).build());
         }
     }

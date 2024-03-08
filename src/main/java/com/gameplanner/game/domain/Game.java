@@ -1,4 +1,4 @@
-package com.gameplanner.game;
+package com.gameplanner.game.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

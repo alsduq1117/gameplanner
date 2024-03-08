@@ -1,13 +1,13 @@
-package com.gameplanner.game;
+package com.gameplanner.game.controller;
 
+import com.gameplanner.game.dto.GameResponse;
+import com.gameplanner.game.service.GameService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

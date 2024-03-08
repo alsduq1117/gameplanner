@@ -1,4 +1,4 @@
-package com.gameplanner.game;
+package com.gameplanner.game.domain;
 
 public enum GameGenre {
     POINT_AND_CLICK(2, "포인트 앤 클릭"),
