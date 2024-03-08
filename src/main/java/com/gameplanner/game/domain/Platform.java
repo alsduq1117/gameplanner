@@ -1,6 +1,5 @@
-package com.gameplanner.game;
+package com.gameplanner.game.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
