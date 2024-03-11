@@ -5,6 +5,7 @@ import com.gameplanner.game.domain.Game;
 import com.gameplanner.game.domain.GameGenre;
 import com.gameplanner.game.domain.GamePlatform;
 import com.gameplanner.game.domain.Platform;
+import com.gameplanner.game.dto.GameRequest;
 import com.gameplanner.game.dto.GameResponse;
 import com.gameplanner.game.repository.GameRepository;
 import com.gameplanner.game.repository.PlatformRepository;
@@ -35,8 +36,8 @@ public class GameService {
 
 
     @Transactional
-    public void insertGames() {
-        List<IGDBGameResponse> gameList = getGameListFromIGDB();
+    public void insertGames(GameRequest gameRequest) {
+        List<IGDBGameResponse> gameList = getGameListFromIGDB(gameRequest);
         for (IGDBGameResponse response : gameList) {
             Game game = buildGameFromResponse(response);
             addPlatformsToGame(response, game);
@@ -81,7 +82,7 @@ public class GameService {
         LocalDateTime nextMonth = DateUtils.getNextMonth(year, month);
         long nextMonthUnixTime = DateUtils.toUnixTime(nextMonth.getYear(), nextMonth.getMonthValue());
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("firstReleaseDate"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("firstReleaseDate", "id"));
         Page<Game> games = gameRepository.findAllByReleaseDateBetween(startUnixTime, nextMonthUnixTime, pageable);
 
         return new GameResponse(games, page, size, year, month);
@@ -95,8 +96,8 @@ public class GameService {
         }
     }
 
-    private List<IGDBGameResponse> getGameListFromIGDB() {
-        return igdbClient.getGameList("fields name,first_release_date,genres,platforms; limit 300; offset 1500; sort first_release_date desc;");
+    private List<IGDBGameResponse> getGameListFromIGDB(GameRequest gameRequest) {
+        return igdbClient.getGameList("fields name,first_release_date,genres,platforms; limit " + gameRequest.getLimit() + "; offset " + gameRequest.getOffset()+ "; sort first_release_date desc;");
     }
 
     private Game buildGameFromResponse(IGDBGameResponse response) {

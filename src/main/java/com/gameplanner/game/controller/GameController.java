@@ -1,5 +1,6 @@
 package com.gameplanner.game.controller;
 
+import com.gameplanner.game.dto.GameRequest;
 import com.gameplanner.game.dto.GameResponse;
 import com.gameplanner.game.service.GameService;
 import jakarta.validation.constraints.Max;
@@ -22,8 +23,8 @@ public class GameController {
     }
 
     @PostMapping("/games")
-    public ResponseEntity insertGames(){
-        gameService.insertGames();
+    public ResponseEntity insertGames(@RequestBody GameRequest gameRequest){
+        gameService.insertGames(gameRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 

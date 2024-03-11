@@ -26,11 +26,5 @@ public interface IGDBClient {
     List<IGDBVideoResponse> getVideos(@RequestBody String body);
 
 
-
-
-
-
-
-
 }
 
