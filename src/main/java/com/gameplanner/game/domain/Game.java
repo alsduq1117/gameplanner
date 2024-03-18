@@ -16,7 +16,7 @@ import java.util.List;
 public class Game {
 
     @Id
-    @Column(name ="game_id")
+    @Column(name = "game_id")
     private Long id;
 
     private String name;
@@ -32,11 +32,11 @@ public class Game {
 
 
     @ElementCollection
-    @CollectionTable(name = "game_screenshots" , joinColumns = @JoinColumn(name = "game_id"))
+    @CollectionTable(name = "game_screenshots", joinColumns = @JoinColumn(name = "game_id"))
     private List<String> screenshots = new ArrayList<>();
 
     @ElementCollection
-    @CollectionTable(name = "game_videos" , joinColumns = @JoinColumn(name = "game_id"))
+    @CollectionTable(name = "game_videos", joinColumns = @JoinColumn(name = "game_id"))
     private List<String> videos = new ArrayList<>();
 
 
@@ -56,7 +56,7 @@ public class Game {
         this.gamePlatforms = gamePlatforms;
     }
 
-    public void updateCover(String cover){
+    public void updateCover(String cover) {
         this.cover = cover;
     }
 }
