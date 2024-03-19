@@ -1,5 +1,6 @@
 package com.gameplanner.game.domain;
 
+import com.gameplanner.client.igdb.IGDBGameResponse;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,7 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -55,6 +59,19 @@ public class Game {
         this.videos = videos;
         this.gamePlatforms = gamePlatforms;
     }
+
+    @Builder
+    public Game(IGDBGameResponse response) {
+        this.id = response.getId();
+        this.name = response.getName();
+        this.firstReleaseDate = response.getFirst_release_date();
+        this.genres = Optional.ofNullable(response.getGenres())
+                .map(genres -> genres.stream().map(GameGenre::getNameById).collect(Collectors.toList())).orElseGet(Collections::emptyList);
+        this.screenshots = new ArrayList<>();
+        this.videos = new ArrayList<>();
+        this.gamePlatforms = new ArrayList<>();
+    }
+
 
     public void updateCover(String cover) {
         this.cover = cover;
