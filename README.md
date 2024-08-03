@@ -60,6 +60,5 @@
 | ![KakaoTalk_20240307_211416142_04](https://github.com/zenu98/GamePlanner/assets/90780629/f3cd3744-bf9f-4c08-804b-8d634d4f8384) | ![KakaoTalk_20240307_211416142_05](https://github.com/zenu98/GamePlanner/assets/90780629/fc843a55-9453-4049-aeb1-caf07fa16456) | ![KakaoTalk_20240421_163932566](https://github.com/zenu98/GamePlanner/assets/90780629/c02912f4-0201-40d2-b562-9b352a1d52f4) | ![KakaoTalk_20240307_211416142_02](https://github.com/zenu98/GamePlanner/assets/90780629/6a423492-6703-4bf9-94f0-b6bf1c139ffa) | ![KakaoTalk_20240307_211416142_06](https://github.com/zenu98/GamePlanner/assets/90780629/fb8b3d2b-c901-4d16-b9fe-626f20b3fe92) |
 
 - 게임 캘린더 기능
-- 로그인 구현
 - 즐겨찾기
 - 게임 검색
