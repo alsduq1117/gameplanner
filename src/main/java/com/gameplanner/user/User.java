@@ -3,7 +3,9 @@ package com.gameplanner.user;
 
 import com.gameplanner.auth.AuthorityType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")

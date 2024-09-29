@@ -1,6 +1,6 @@
 package com.gameplanner.client.steam;
 
-import lombok.*;
+import lombok.Data;
 
 import java.util.List;
 

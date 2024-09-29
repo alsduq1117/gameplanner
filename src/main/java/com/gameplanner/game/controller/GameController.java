@@ -17,38 +17,38 @@ public class GameController {
     private final GameService gameService;
 
     @PostMapping("/platforms")
-    public ResponseEntity insertPlatforms(){
+    public ResponseEntity insertPlatforms() {
         gameService.insertPlatforms();
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/games")
-    public ResponseEntity insertGames(@RequestBody GameRequest gameRequest){
+    public ResponseEntity insertGames(@RequestBody GameRequest gameRequest) {
         gameService.insertGames(gameRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/games/{year}/{month}")
-    public ResponseEntity<GameResponse> getGameList(@RequestParam int page, @RequestParam int size, @PathVariable @Min(2000) int year, @PathVariable @Min(1) @Max(12) int month){
+    public ResponseEntity<GameResponse> getGameList(@RequestParam int page, @RequestParam int size, @PathVariable @Min(2000) int year, @PathVariable @Min(1) @Max(12) int month) {
         GameResponse gameList = gameService.getGameList(page, size, year, month);
         return new ResponseEntity(gameList, HttpStatus.OK);
     }
 
     @PostMapping("/cover")
-    public ResponseEntity insertCover(){
+    public ResponseEntity insertCover() {
         gameService.insertCover();
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/screenshots")
-    public ResponseEntity insertScreenshots(){
+    public ResponseEntity insertScreenshots() {
         gameService.insertScreenshots();
         return new ResponseEntity(HttpStatus.OK);
     }
 
 
     @PostMapping("videos")
-    public ResponseEntity insertVideos(){
+    public ResponseEntity insertVideos() {
         gameService.insertVideos();
         return new ResponseEntity(HttpStatus.OK);
     }

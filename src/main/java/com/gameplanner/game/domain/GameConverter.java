@@ -2,7 +2,6 @@ package com.gameplanner.game.domain;
 
 import com.gameplanner.client.igdb.IGDBGameResponse;
 import lombok.Data;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

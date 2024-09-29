@@ -97,7 +97,7 @@ public class GameService {
     }
 
     private List<IGDBGameResponse> getGameListFromIGDB(GameRequest gameRequest) {
-        return igdbClient.getGameList("fields name,first_release_date,genres,platforms; limit " + gameRequest.getLimit() + "; offset " + gameRequest.getOffset()+ "; sort first_release_date desc;");
+        return igdbClient.getGameList("fields name,first_release_date,genres,platforms; limit " + gameRequest.getLimit() + "; offset " + gameRequest.getOffset() + "; sort first_release_date desc;");
     }
 
     private Game buildGameFromResponse(IGDBGameResponse response) {

@@ -1,12 +1,9 @@
 package com.gameplanner.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lombok.*;
 
 @Getter
 @Setter
@@ -29,7 +26,7 @@ public class UserDto {
     private String nickname;
 
     public static UserDto from(User user) {
-        if(user == null) return null;
+        if (user == null) return null;
 
         return UserDto.builder()
                 .username(user.getUsername())

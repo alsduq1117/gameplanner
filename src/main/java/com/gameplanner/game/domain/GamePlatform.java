@@ -18,7 +18,7 @@ public class GamePlatform {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="game_id")
+    @JoinColumn(name = "game_id")
     @JsonIgnore
     private Game game;
 

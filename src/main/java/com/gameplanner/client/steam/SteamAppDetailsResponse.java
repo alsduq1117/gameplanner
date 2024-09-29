@@ -2,8 +2,6 @@ package com.gameplanner.client.steam;
 
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
 public class SteamAppDetailsResponse {
 

@@ -22,13 +22,13 @@ public class GameData {
     private List<String> screenshots;
     private List<String> videos;
 
-    public GameData(Game game){
+    public GameData(Game game) {
         this.id = game.getId();
         this.name = game.getName();
         this.cover = game.getCover();
         this.genres = game.getGenres();
         long unixTime = game.getFirstReleaseDate();
-        this.first_release_date = DateUtils.formatUnixTime(unixTime,"yyyy.MM.dd");
+        this.first_release_date = DateUtils.formatUnixTime(unixTime, "yyyy.MM.dd");
         this.platforms = game.getGamePlatforms().stream()
                 .map(gamePlatform -> gamePlatform.getPlatform().getName())
                 .collect(Collectors.toList());

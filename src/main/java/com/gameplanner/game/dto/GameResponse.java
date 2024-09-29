@@ -24,7 +24,7 @@ public class GameResponse {
     public GameResponse(Page<Game> games, int page, int size, int year, int month) {
         this.count = games.getTotalElements();
         if (games.hasNext()) {
-            this.next = "/api/games/" + String.format("%d/%02d", year, month) + "?page=" + (page + 1) +"&size=" + size;
+            this.next = "/api/games/" + String.format("%d/%02d", year, month) + "?page=" + (page + 1) + "&size=" + size;
         }
         if (games.hasPrevious()) {
             this.previous = "/api/games/" + String.format("%d/%02d", year, month) + "?page=" + (page - 1) + "&size=" + size;

@@ -6,7 +6,6 @@ import com.gameplanner.jwt.JwtAuthenticationEntryPoint;
 import com.gameplanner.jwt.JwtSecurityConfig;
 import com.gameplanner.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -55,8 +54,8 @@ public class SecurityConfig {
 
                 // Http 요청에 대한 접근 제어 설정
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup","/api/games/*/*","/api/games", "/api/platforms", "/api/screenshots", "/api/videos", "/api/cover").permitAll()  // 해당 경로는 모두 허용
-                        .requestMatchers( "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()  // Swagger 관련 경로는 모두 허용
+                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup", "/api/games/*/*", "/api/games", "/api/platforms", "/api/screenshots", "/api/videos", "/api/cover").permitAll()  // 해당 경로는 모두 허용
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()  // Swagger 관련 경로는 모두 허용
                         .anyRequest().authenticated()  // 그 외 요청은 모두 인증 필요
                 )
 
@@ -66,7 +65,8 @@ public class SecurityConfig {
                 )
 
                 // JWT 토큰 제공자를 사용하는 JwtSecurityConfig 적용
-                .with(new JwtSecurityConfig(tokenProvider), customizer -> {});
+                .with(new JwtSecurityConfig(tokenProvider), customizer -> {
+                });
 
         return http.build();
     }

@@ -13,6 +13,6 @@ public interface OpenCriticClient {
     OpenCriticSearchGameResponse searchGame(@RequestParam("criteria") String criteria);
 
     @GetMapping("/game")
-    List<OpenCriticGameResponse> getGameList(@RequestParam("platforms") String platforms, @RequestParam("sort")String sort);
+    List<OpenCriticGameResponse> getGameList(@RequestParam("platforms") String platforms, @RequestParam("sort") String sort);
 
 }

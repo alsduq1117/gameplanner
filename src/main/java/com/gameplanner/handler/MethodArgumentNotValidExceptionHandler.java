@@ -1,7 +1,5 @@
 package com.gameplanner.handler;
 
-import java.util.List;
-
 import com.gameplanner.exception.ErrorDto;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -29,7 +29,7 @@ public class MethodArgumentNotValidExceptionHandler {
 
     private ErrorDto processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
         ErrorDto errorDTO = new ErrorDto(BAD_REQUEST.value(), "@Valid Error");
-        for (org.springframework.validation.FieldError fieldError: fieldErrors) {
+        for (org.springframework.validation.FieldError fieldError : fieldErrors) {
             errorDTO.addFieldError(fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
         }
         return errorDTO;

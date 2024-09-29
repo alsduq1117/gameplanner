@@ -4,6 +4,7 @@ import com.gameplanner.jwt.JwtFilter;
 import com.gameplanner.jwt.TokenDto;
 import com.gameplanner.jwt.TokenProvider;
 import com.gameplanner.user.LoginDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
